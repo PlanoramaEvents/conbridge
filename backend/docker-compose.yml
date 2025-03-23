@@ -1,0 +1,21 @@
+services:
+  server:
+    build: .
+    ports:
+      - "3002:3002"
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/conbridgedb
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data_container:/data/db
+volumes:
+  mongodb_data_container:
+  node_modules:
